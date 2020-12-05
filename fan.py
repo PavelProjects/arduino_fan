@@ -8,7 +8,7 @@ def signal_handler(sig, frame):
     os.system(tunrOff)
     sys.exit(0)
 
-device  = "/dev/ttyUSB0"
+device  = input("device : ")
 max_temp = int(input('Max temperature : '))
 sleep_time = int(input('Sleep time : '))
 
@@ -28,7 +28,7 @@ while flag and flag == 1:
     core_temp = subprocess.Popen(['sensors', '-u'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     out, err = core_temp.communicate()
     temp = int(repr(out).split('\\n').pop(3).split(' ').pop(3).split('.').pop(0))
-    print(temp)
+    # print(temp)
     if temp > max_temp and prev_temp > max_temp:
         os.system(tunrOn)
     else:
